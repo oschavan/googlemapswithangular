@@ -1,4 +1,17 @@
-<div *ngIf="lat && lng">
+<div class="row">
+  Enter Location : <input placeholder="Location" type="text" 
+  class="input-field col s12" [(ngModel)]="inputLocation"/>
+
+    <button
+    class="waves-effect waves-light btn col s4"    
+    (click)="searchLocation()"
+    >
+    Search
+    </button>
+
+</div>
+<div class="ht600" id="map"></div>
+<!-- <div *ngIf="lat && lng"> -->
 
         <!-- <agm-map [latitude]="lat" [longitude]="lng">      
           <agm-marker [latitude]="lat" [longitude]="lng">      
@@ -11,11 +24,13 @@
      
         <!-- [zoom]="zoom" -->
 
-        <agm-map 
+        <!-- <agm-map
             [latitude]="lat"
             [longitude]="lng"
             [disableDefaultUI]="false"
+            [disableDoubleClickZoom] = "true"
             [zoomControl]="false"
+            [zoom]="18"
             (mapClick)="mapClicked($event)">
 
             <agm-marker 
@@ -33,13 +48,13 @@
                 
             </agm-marker>
             
-            <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+            <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
                 [radius]="5000"
                 [fillColor]="'red'"
                 [circleDraggable]="true"
                 [editable]="true">
-            </agm-circle> -->
-    </agm-map>
-<div>
+            </agm-circle> 
+    </agm-map> -->
+
 
 <!-- <agm-map [latitude]="lat" [longitude]="lng"></agm-map> -->

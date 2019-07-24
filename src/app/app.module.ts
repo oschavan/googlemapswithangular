@@ -7,7 +7,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderListComponent } from './order-list/order-list.component';
 
 import { OrdersService } from "./shared/orders.service";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AgmCoreModule } from "@agm/core";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +26,9 @@ import { AgmCoreModule } from "@agm/core";
     OrderListComponent,
     GoogleMapsComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -34,7 +36,8 @@ import { AgmCoreModule } from "@agm/core";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey:environment.googleMapskey
+      apiKey:environment.googleMapskey,
+      libraries:["places"]
     })
   ],
   providers: [OrdersService],
