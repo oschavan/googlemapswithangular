@@ -4,7 +4,8 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { MouseEvent } from '@agm/core';
 import {NgForm} from '@angular/forms';
 import { NgModule } from '@angular/core';
-//import {  } from '@agm/core/services/google-maps-types';
+import { InfoWindow } from '@agm/core/services/google-maps-types';
+import {  } from '@agm/core/services/google-maps-types';
 //import { google } from '@google/maps';
 
 @Component({
@@ -16,24 +17,35 @@ import { NgModule } from '@angular/core';
 
 export class GoogleMapsComponent implements OnInit {
 
+  collection:string[]=[''];
   lat: number ;
   lng: number ;
-  inputLocation: string='Pune';
+  inputLocation: string='Katraj';
+  inputDestination:string='Kharadi';
   //mapsAPILoader: MapsAPILoader;
   ngZone: NgZone;
-  //map:any;
-  infowindow:google.maps.InfoWindow;
-  
+  //infowindow:InfoWindow;
+  pune:any;
+  map:any;
+
+  add(){
+    this.collection.push("");
+  }    
+
+  constructor() { 
+    // var pune = new google.maps.LatLng(18.500636,73.858705);
+    // var infowindow = new google.maps.InfoWindow();
+    // var ele = document.getElementById('map');
+    //  this.map = new google.maps.Map(ele, {center: pune, zoom: 15});
+
+  }
 
   searchLocation(){
-    // let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-    //   types: ["address"]
-    // });
     var pune = new google.maps.LatLng(18.500636,73.858705);
-    this.infowindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow();
     var ele = document.getElementById('map');
     let map = new google.maps.Map(ele, {center: pune, zoom: 15});
-  
+
       var request = {
         query: this.inputLocation,
         fields: ['name', 'geometry'],
@@ -42,15 +54,15 @@ export class GoogleMapsComponent implements OnInit {
     service.findPlaceFromQuery(request, function(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
-          var marker = new google.maps.Marker({
+          new google.maps.Marker({
             map: map,
             position: results[i].geometry.location
           });
       
-          google.maps.event.addListener(marker, 'click', function() {
-            this.infowindow.setContent(results[i].name);
-            this.infowindow.open(map, this);
-          });
+          // google.maps.event.addListener(marker, 'click', function() {
+          //   this.infowindow.setContent(results[i].name);
+          //   this.infowindow.open(map, this);
+          // });
           //this.createMarker(results[i],map);
         }
         map.setCenter(results[0].geometry.location);
@@ -59,15 +71,15 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   public createMarker(place,map) {
-    var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
-    });
+    // var marker = new google.maps.Marker({
+    //   map: map,
+    //   position: place.geometry.location
+    // });
 
-    google.maps.event.addListener(marker, 'click', function() {
-      this.infowindow.setContent(place.name);
-      this.infowindow.open(map, this);
-    });
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   this.infowindow.setContent(place.name);
+    //   this.infowindow.open(map, this);
+    // });
   }
 
   //markers: any;
@@ -106,45 +118,14 @@ export class GoogleMapsComponent implements OnInit {
     console.log('dragEnd', m, $event);
   }
 
-  constructor() { 
-    
-  }
-
-  ngOnInit() {
-    var pune = new google.maps.LatLng(18.500636,73.858705);
-    this.infowindow = new google.maps.InfoWindow();
-    var ele = document.getElementById('map');
-    this.map = new google.maps.Map(ele, {center: pune, zoom: 15});
   
-     this.getUserLocation();
-
-    // this.subscription = this.geo.hits
-    // .subscribe(hits => this.markers = hits)
+  ngOnInit() {
+   
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
   }
 
-  private getUserLocation() {
-    /// locate the user
-    if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(position => {
-        this.markers.push({
-          lat:  position.coords.latitude, // 18.550378
-          lng: position.coords.longitude,// 73.950017
-          label:"Current",
-          draggable: true
-        });
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-
-     //   this.geo.getLocations(100, [this.lat, this.lng])
-      });
-    }
-  }
-
-  
 }
 
 interface marker {
@@ -153,3 +134,43 @@ interface marker {
 	label?: string;
 	draggable: boolean;
 }
+
+
+// getDirections(){
+    // var pune = new google.maps.LatLng(18.500636,73.858705);    
+    // var  ele = document.getElementById('map');
+    // let map = new google.maps.Map(ele, {center: pune, zoom: 15});
+  
+    // var directionsService = new google.maps.DirectionsService;
+    // var directionsDisplay = new google.maps.DirectionsRenderer;
+    // directionsDisplay.setMap(map);
+    // directionsService.route({
+    //   origin: this.inputLocation,
+    //   destination: this.inputDestination,
+    //   travelMode: 'DRIVING'      
+    // }, function(response, status) {
+    //   if (status === 'OK') {
+    //     directionsDisplay.setDirections(response);
+    //   } else {
+    //     window.alert('Directions request failed due to ' + status);
+    //   }
+    // });
+  //}
+
+  //private getUserLocation() {
+    /// locate the user
+    // if (navigator.geolocation) {
+    //    navigator.geolocation.getCurrentPosition(position => {
+    //     this.markers.push({
+    //       lat:  position.coords.latitude, // 18.550378
+    //       lng: position.coords.longitude,// 73.950017
+    //       label:"Current",
+    //       draggable: true
+    //     });
+    //     this.lat = position.coords.latitude;
+    //     this.lng = position.coords.longitude;
+
+    //  //   this.geo.getLocations(100, [this.lat, this.lng])
+    //   });
+    // }
+  //}

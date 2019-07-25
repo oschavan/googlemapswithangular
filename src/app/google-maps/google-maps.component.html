@@ -1,15 +1,25 @@
 <div class="row">
-  Enter Location : <input placeholder="Location" type="text" 
-  class="input-field col s12" [(ngModel)]="inputLocation"/>
+  Enter Location : 
+  <!-- <div *ngFor="let item of collection; let in=index">
+    <input type="text" [(ngModel)]="item" name="name{{in}}"
+    class="form-control" />  
+  </div>
+  <input type="button" value="Add" (click)="add()"/> -->
+  <div class="col-md-6">
+    <input placeholder="Source" type="text" 
+    class="input-field col s12" [(ngModel)]="inputLocation"/>
+  </div>
+  <!-- <div class="col-md-6">
+    <input placeholder="Destination" type="text" 
+    class="input-field col s12" [(ngModel)]="inputDestination"/>
+  </div> -->
 
-    <button
-    class="waves-effect waves-light btn col s4"    
-    (click)="searchLocation()"
-    >
+    <button class="waves-effect waves-light btn col s4" (click)="searchLocation()">
     Search
-    </button>
+    </button>  
 
 </div>
+
 <div class="ht600" id="map"></div>
 <!-- <div *ngIf="lat && lng"> -->
 

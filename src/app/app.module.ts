@@ -17,6 +17,7 @@ import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AgmCoreModule } from "@agm/core";
+import { TestcComponent } from './testc/testc.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AgmCoreModule } from "@agm/core";
     AppComponent,
     OrdersComponent,
     OrderListComponent,
-    GoogleMapsComponent
+    GoogleMapsComponent,
+    TestcComponent
   ],
   imports: [    
     BrowserModule,
